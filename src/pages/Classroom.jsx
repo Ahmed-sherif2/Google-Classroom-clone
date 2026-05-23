@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Clasroom.css";
 
 // Classroom page - Stream is the main area. Classwork/People/Marks are tabs (placeholders).
 export default function Classroom() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const classroomData = location.state?.classroom || {};
+
   // Local state for showing announcement modal
   const [showModal, setShowModal] = useState(false);
+  const [activeTab, setActiveTab] = useState("stream");
 
   // Simple announcements list stored locally for demo purposes
   const [announcements, setAnnouncements] = useState([
@@ -21,6 +27,15 @@ export default function Classroom() {
 
   // Toggle modal visibility
   const toggleModal = () => setShowModal((v) => !v);
+
+  // Handle tab click
+  const handleTabClick = (tabName) => {
+    if (tabName === "people") {
+      navigate("/people", { state: { classroom: classroomData } });
+    } else {
+      setActiveTab(tabName);
+    }
+  };
 
   // Handle announcement creation
   const handlePostAnnouncement = (e) => {
@@ -42,14 +57,34 @@ export default function Classroom() {
       {/* Top bar with class title, tabs and announcement button */}
       <div className="classroom-topbar">
         <div className="top-left">
-          <h1 className="class-title">Biology 101</h1>
+          <h1 className="class-title">{classroomData.name || "Classroom"}</h1>
 
           {/* Tabs for Stream / Classwork / People / Marks (only Stream implemented) */}
           <div className="tabs">
-            <button className="tab active">Stream</button>
-            <button className="tab">Classwork</button>
-            <button className="tab">People</button>
-            <button className="tab">Marks</button>
+            <button
+              className={`tab ${activeTab === "stream" ? "active" : ""}`}
+              onClick={() => handleTabClick("stream")}
+            >
+              Stream
+            </button>
+            <button
+              className={`tab ${activeTab === "classwork" ? "active" : ""}`}
+              onClick={() => handleTabClick("classwork")}
+            >
+              Classwork
+            </button>
+            <button
+              className={`tab ${activeTab === "people" ? "active" : ""}`}
+              onClick={() => handleTabClick("people")}
+            >
+              People
+            </button>
+            <button
+              className={`tab ${activeTab === "marks" ? "active" : ""}`}
+              onClick={() => handleTabClick("marks")}
+            >
+              Marks
+            </button>
           </div>
         </div>
 

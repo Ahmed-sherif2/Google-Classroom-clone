@@ -1,6 +1,6 @@
 import "./ClassroomCard.css";
 
-function ClassroomCard({ classroom }) {
+function ClassroomCard({ classroom, onClassroomClick }) {
   // Props for the classroom: name, description, color, image, etc.
   // color - background color for the card
   // name - classroom name
@@ -10,7 +10,9 @@ function ClassroomCard({ classroom }) {
 
   const handleClick = () => {
     console.log(`Opening classroom: ${classroom.name}`);
-    // Add navigation logic here
+    if (onClassroomClick) {
+      onClassroomClick(classroom);
+    }
   };
 
   return (
