@@ -1,0 +1,62 @@
+/* APP - Root container with flex layout */
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* APP MAIN CONTAINER */
+.app-main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* DASHBOARD CONTAINER */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+.dashboard-container h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.dashboard-container p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 24px 16px;
+    min-height: calc(100vh - 56px);
+  }
+
+  .dashboard-container h2 {
+    font-size: 24px;
+  }
+
+  .dashboard-container p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    padding: 16px 12px;
+    min-height: calc(100vh - 52px);
+  }
+
+  .dashboard-container h2 {
+    font-size: 20px;
+  }
+
+  .dashboard-container p {
+    font-size: 13px;
+  }
+}
