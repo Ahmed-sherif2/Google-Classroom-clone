@@ -111,7 +111,7 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     // Validate required fields
-    if (!email || !password) {
+    if ((!email || !password)|| (email=="admin" && password=="admin")) {
       return res.status(400).json({
         success: false,
         message: "Please provide email and password",

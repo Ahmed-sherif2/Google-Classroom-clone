@@ -70,6 +70,7 @@ function Home() {
       {/* Main classrooms container */}
       <section className="classrooms-section">
         {/* Header section with title */}
+
         <div className="section-header">
           <h2>Your Classrooms</h2>
           <p>Continue learning and explore new courses</p>

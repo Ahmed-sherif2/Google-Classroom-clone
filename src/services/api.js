@@ -48,7 +48,13 @@ const apiCall = async (endpoint, method = "GET", data = null) => {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
 
     // Parse response as JSON
-    const responseData = await response.json();
+    let responseData;
+    try {
+      responseData = await response.json();
+    } catch (parseError) {
+      console.error(`Failed to parse response as JSON:`, parseError);
+      throw new Error(`Server error: ${response.status} ${response.statusText}`);
+    }
 
     // Check if response is successful
     if (!response.ok) {
